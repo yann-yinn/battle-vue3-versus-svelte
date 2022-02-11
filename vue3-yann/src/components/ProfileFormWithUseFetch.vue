@@ -30,7 +30,7 @@ async function submit() {
       <input name="email" type="email" v-model="formValues.email" required />
     </div>
     <div>
-      <button type="submit" :disabled="state === 'PENDING'">Save</button>
+      <button type="submit" :disabled="state == 'pending'">Save</button>
     </div>
     <p v-if="state === 'pending'">Sauvegarde en cours</p>
     <p v-if="state === 'error'">{{ error }}</p>

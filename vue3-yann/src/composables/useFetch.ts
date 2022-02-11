@@ -15,12 +15,11 @@ export default function useFetch<Type>(
     if (!response.ok) {
       state = "error";
       error = `HTTP error! status: ${response.status}`;
-      throw new Error(error.value);
+      throw new Error(error);
     }
-    const result = await response.json();
-    data = result;
+    data = await response.json();
     state = "success";
-    return result;
+    return data;
   }
 
   return $$({ state, error, data, execute });
