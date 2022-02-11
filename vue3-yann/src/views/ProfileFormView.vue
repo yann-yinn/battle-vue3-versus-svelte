@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UserProfileForm from "@/components/UserProfileForm.vue";
+import ProfileForm from "@/components/ProfileForm.vue";
 import type { User } from "@/types";
 
 let data = $ref<User | null>(null);
@@ -19,7 +19,6 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
   .then((result) => {
     isFetching = false;
     data = result;
-    console.log("result", result);
   });
 </script>
 
@@ -27,6 +26,6 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
   <div v-if="error">{{ error }}</div>
   <div v-if="isFetching">Chargement</div>
   <div v-if="data">
-    <UserProfileForm :user="data"></UserProfileForm>
+    <ProfileForm :user="data"></ProfileForm>
   </div>
 </template>

@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import BasicCounterView from "@/views/BasicCounterView.vue";
 import BasicCounterWithDoubleView from "@/views/BasicCounterWithDoubleView.vue";
-import userProfileFormView from "@/views/userProfileFormView.vue";
+import ProfileFormView from "@/views/ProfileFormView.vue";
+import ProfileFormViewWithUseFetch from "@/views/ProfileFormViewWithUseFetch.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,7 +20,12 @@ const router = createRouter({
     {
       path: "/profile-form",
       name: "ProfileForm",
-      component: userProfileFormView,
+      component: ProfileFormView,
+    },
+    {
+      path: "/profile-form-with-use-fetch",
+      name: "ProfileFormWithUseFetch",
+      component: ProfileFormViewWithUseFetch,
     },
   ],
 });
