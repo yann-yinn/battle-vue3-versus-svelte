@@ -6,7 +6,7 @@ const props = defineProps<{
   user: User;
 }>();
 
-const { isFetching, error, execute, isFinished } = useFetch<User>(
+const { state, error, execute } = useFetch<User>(
   "https://jsonplaceholder.typicode.com/users/1",
   { method: "PUT" }
 );
@@ -31,10 +31,10 @@ async function submit() {
       <input name="email" type="email" v-model="formValues.email" required />
     </div>
     <div>
-      <button type="submit" :disabled="isFetching">Save</button>
+      <button type="submit" :disabled="state === 'PENDING'">Save</button>
     </div>
-    <p v-if="isFetching">Sauvegarde en cours</p>
-    <p v-if="error">{{ error }}</p>
-    <p v-if="isFinished && !error">Succès de la sauvegarde!</p>
+    <p v-if="state === 'PENDING'">Sauvegarde en cours</p>
+    <p v-if="state === 'ERROR'">{{ error }}</p>
+    <p v-if="state === 'SUCCESS'">Succès de la sauvegarde!</p>
   </form>
 </template>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { User } from "@/types";
+import type { User, RequestState } from "@/types";
 
 const props = defineProps<{
   user: User;
 }>();
 
-const error = $ref(null);
-const isFinished = $ref(false);
-const isFetching = $ref(false);
+let state = $ref<RequestState>("UNSENT");
+let error = $ref(null);
+let isFetching = $ref(false);
 
 const formValues = $ref({
   id: props.user.id,
@@ -16,19 +16,19 @@ const formValues = $ref({
 });
 
 async function submit() {
-  isFetching = true;
-  isFinished = false;
+  state = "PENDING";
   error = null;
   const response = await fetch("https://jsonplaceholder.typicode.com/users/1", {
     method: "PUT",
   });
-  isFinished = true;
-  isFetching = false;
+
   if (!response.ok) {
+    state = "ERROR";
     const errorMessage = `HTTP Error: ${response.status} ${response.statusText}`;
     error = errorMessage;
     throw new Error(errorMessage);
   }
+  state = "SUCCESS";
 }
 </script>
 
@@ -41,12 +41,10 @@ async function submit() {
       <input name="email" type="email" v-model="formValues.email" required />
     </div>
     <div>
-      <button type="submit" :disabled="isFetching">Save</button>
+      <button type="submit" :disabled="state == 'PENDING'">Save</button>
     </div>
-    <p v-if="isFetching">Sauvegarde en cours</p>
-    <p v-if="error">{{ error }}</p>
-    <p v-if="isFinished && !error">
-      Votre profil a été correctement sauvegardé
-    </p>
+    <p v-if="state == 'PENDING'">Sauvegarde en cours</p>
+    <p v-if="state == 'ERROR'">{{ error }}</p>
+    <p v-if="state == 'SUCCESS'">Votre profil a été correctement sauvegardé</p>
   </form>
 </template>

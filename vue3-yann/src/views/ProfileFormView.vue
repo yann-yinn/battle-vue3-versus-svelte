@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ProfileForm from "@/components/ProfileForm.vue";
-import type { User } from "@/types";
+import type { User, RequestState } from "@/types";
 
 let data = $ref<User | null>(null);
-let isFetching = $ref(true);
+let state = $ref<RequestState>("PENDING");
 let error = $ref<string | null>(null);
 
 fetch("https://jsonplaceholder.typicode.com/users/1")
@@ -11,21 +11,21 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
     if (!response.ok) {
       const errorMessage = `HTTP Error: ${response.status} ${response.statusText}`;
       error = errorMessage;
-      isFetching = false;
+      state = "ERROR";
       throw new Error(errorMessage);
     }
     return response.json();
   })
   .then((result) => {
-    isFetching = false;
+    state = "SUCCESS";
     data = result;
   });
 </script>
 
 <template>
-  <div v-if="error">{{ error }}</div>
-  <div v-if="isFetching">Chargement</div>
-  <div v-if="data">
+  <div v-if="state == 'ERROR'">{{ error }}</div>
+  <div v-if="state == 'PENDING'">Chargement</div>
+  <div v-if="state == 'SUCCESS'">
     <ProfileForm :user="data"></ProfileForm>
   </div>
 </template>
