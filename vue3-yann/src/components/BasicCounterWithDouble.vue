@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const count = $ref(0);
+let count = $ref(0);
 const double = $computed(() => count * 2);
 </script>
 

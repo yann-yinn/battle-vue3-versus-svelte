@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import BasicCounter from "../views/BasicCounter.vue";
-import BasicCounterWithDouble from "../views/BasicCounterWithDouble.vue";
+import BasicCounterView from "@/views/BasicCounterView.vue";
+import BasicCounterWithDoubleView from "@/views/BasicCounterWithDoubleView.vue";
+import userProfileFormView from "@/views/userProfileFormView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,12 +9,17 @@ const router = createRouter({
     {
       path: "/",
       name: "BasicCounter",
-      component: BasicCounter,
+      component: BasicCounterView,
     },
     {
       path: "/basic-counter-with-double",
       name: "BasicCounterWithDouble",
-      component: BasicCounterWithDouble,
+      component: BasicCounterWithDoubleView,
+    },
+    {
+      path: "/profile-form",
+      name: "ProfileForm",
+      component: userProfileFormView,
     },
   ],
 });

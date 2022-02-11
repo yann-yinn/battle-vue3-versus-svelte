@@ -8,6 +8,8 @@ import { RouterLink, RouterView } from "vue-router";
     <RouterLink to="/basic-counter-with-double">
       Basic counter with double
     </RouterLink>
+    |
+    <RouterLink to="/profile-form"> Profile Form </RouterLink>
   </nav>
 
   <RouterView />
