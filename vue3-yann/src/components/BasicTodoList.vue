@@ -1,23 +1,21 @@
 <script lang="ts" setup>
-interface Todo {
-  done: false;
-  name: "";
-}
+import type { Todo } from "@/types";
 
 let newTodo = $ref("");
 let todos = $ref<Todo[]>([]);
 
 function addTodo() {
-  if (newTodo.trim().length === 0) return;
-  todos.push({
-    done: false,
-    name: newTodo,
-  });
-  newTodo = "";
+  if (newTodo.trim().length > 0) {
+    todos.push({
+      done: false,
+      name: newTodo,
+    });
+    newTodo = "";
+  }
 }
 
-function removeTodo(index: number) {
-  todos.splice(index, 1);
+function removeTodo(i: number) {
+  todos.splice(i, 1);
 }
 </script>
 

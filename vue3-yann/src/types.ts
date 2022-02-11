@@ -5,3 +5,8 @@ export interface User {
 }
 
 export type RequestState = "unsent" | "pending" | "error" | "success";
+
+export interface Todo {
+  done: false;
+  name: "";
+}
