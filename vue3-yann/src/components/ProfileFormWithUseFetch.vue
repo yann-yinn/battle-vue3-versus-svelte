@@ -12,7 +12,6 @@ const { state, error, execute } = useFetch<User>(
 );
 
 const formValues = $ref({
-  id: props.user.id,
   name: props.user.name,
   email: props.user.email,
 });
@@ -33,8 +32,8 @@ async function submit() {
     <div>
       <button type="submit" :disabled="state === 'PENDING'">Save</button>
     </div>
-    <p v-if="state === 'PENDING'">Sauvegarde en cours</p>
-    <p v-if="state === 'ERROR'">{{ error }}</p>
-    <p v-if="state === 'SUCCESS'">Succès de la sauvegarde!</p>
+    <p v-if="state === 'pending'">Sauvegarde en cours</p>
+    <p v-if="state === 'error'">{{ error }}</p>
+    <p v-if="state === 'success'">Succès de la sauvegarde!</p>
   </form>
 </template>

@@ -3,7 +3,7 @@ import ProfileForm from "@/components/ProfileForm.vue";
 import type { User, RequestState } from "@/types";
 
 let data = $ref<User | null>(null);
-let state = $ref<RequestState>("PENDING");
+let state = $ref<RequestState>("pending");
 let error = $ref<string | null>(null);
 
 fetch("https://jsonplaceholder.typicode.com/users/1")
@@ -11,21 +11,21 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
     if (!response.ok) {
       const errorMessage = `HTTP Error: ${response.status} ${response.statusText}`;
       error = errorMessage;
-      state = "ERROR";
+      state = "error";
       throw new Error(errorMessage);
     }
     return response.json();
   })
   .then((result) => {
-    state = "SUCCESS";
+    state = "success";
     data = result;
   });
 </script>
 
 <template>
-  <div v-if="state == 'ERROR'">{{ error }}</div>
-  <div v-if="state == 'PENDING'">Chargement</div>
-  <div v-if="state == 'SUCCESS'">
+  <div v-if="state == 'error'">{{ error }}</div>
+  <div v-if="state == 'pending'">Chargement</div>
+  <div v-if="state == 'success'">
     <ProfileForm :user="data"></ProfileForm>
   </div>
 </template>

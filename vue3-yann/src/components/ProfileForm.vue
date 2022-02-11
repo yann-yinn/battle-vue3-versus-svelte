@@ -5,12 +5,10 @@ const props = defineProps<{
   user: User;
 }>();
 
-let state = $ref<RequestState>("UNSENT");
+let state = $ref<RequestState>("unsent");
 let error = $ref(null);
-let isFetching = $ref(false);
 
 const formValues = $ref({
-  id: props.user.id,
   name: props.user.name,
   email: props.user.email,
 });
@@ -28,7 +26,7 @@ async function submit() {
     error = errorMessage;
     throw new Error(errorMessage);
   }
-  state = "SUCCESS";
+  state = "success";
 }
 </script>
 
@@ -43,8 +41,8 @@ async function submit() {
     <div>
       <button type="submit" :disabled="state == 'PENDING'">Save</button>
     </div>
-    <p v-if="state == 'PENDING'">Sauvegarde en cours</p>
-    <p v-if="state == 'ERROR'">{{ error }}</p>
-    <p v-if="state == 'SUCCESS'">Votre profil a été correctement sauvegardé</p>
+    <p v-if="state == 'pending'">Sauvegarde en cours</p>
+    <p v-if="state == 'error'">{{ error }}</p>
+    <p v-if="state == 'success'">Votre profil a été correctement sauvegardé</p>
   </form>
 </template>

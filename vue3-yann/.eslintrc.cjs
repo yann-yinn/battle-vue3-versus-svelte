@@ -13,6 +13,7 @@ module.exports = {
     "vue/setup-compiler-macros": true,
   },
   globals: {
+    $$: "readonly",
     $ref: "readonly",
     $computed: "readonly",
     $shallowRef: "readonly",

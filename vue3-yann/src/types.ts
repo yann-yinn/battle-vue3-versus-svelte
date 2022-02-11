@@ -1,7 +1,7 @@
 export interface User {
-  id: number;
+  id?: number;
   name: string;
   email: string;
 }
 
-export type RequestState = "UNSENT" | "PENDING" | "ERROR" | "SUCCESS";
+export type RequestState = "unsent" | "pending" | "error" | "success";
